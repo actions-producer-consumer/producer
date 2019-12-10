@@ -8,4 +8,4 @@ jobs:
     steps:
       - name: send dispatch
         run: |
-         curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json"  -H "Content-Type: application/json" https://api.github.com/repos/actions-producer-consumer/consumer/dispatches --data '{"event_type": "build_application"}'
+         curl --fail -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -X POST https://api.github.com/repos/actions-producer-consumer/consumer/dispatches -H 'Accept: application/vnd.github.everest-preview+json' --data "{\"event_type\": \"consume\"}"
