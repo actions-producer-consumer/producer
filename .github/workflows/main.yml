@@ -5,13 +5,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps: [{
-        name: 'Repository dispatch',
-        uses: defold/repository-dispatch@1.1.4,
-        with: {
-            repo: 'actions-producer-consumer/consumer',
-            token: '${{ secrets.GITHUB_TOKEN }}',
-            user: 'nabilcode@github.com',
-            action: 'consume'
-        }
-    }]
+    steps:
+      - name: send dispatch
+        run: |
+         curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json"  -H "Content-Type: application/json" https://api.github.com/repos/actions-producer-consumer/consumer/dispatches --data '{"event_type": "build_application"}'
