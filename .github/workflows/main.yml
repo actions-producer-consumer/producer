@@ -1,0 +1,17 @@
+name: My workflow
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: [{
+        name: 'Repository dispatch',
+        uses: defold/repository-dispatch@1.1.4,
+        with: {
+            repo: 'actions-producer-consumer/consumer',
+            token: '${{ secrets.GITHUB_TOKEN }}',
+            user: 'nabilcode@github.com',
+            action: 'consume'
+        }
+    }]
